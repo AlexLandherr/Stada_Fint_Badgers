@@ -4,7 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 // Magnus was here
-
+// Marie var också här
 
 @SpringBootApplication
 public class StadaFintBadgersApplication {
