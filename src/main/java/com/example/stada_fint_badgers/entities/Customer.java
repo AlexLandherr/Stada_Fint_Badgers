@@ -1,6 +1,7 @@
 package com.example.stada_fint_badgers.entities;
 
 import com.example.stada_fint_badgers.dto.CustomerResponseDTO;
+import org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration;
 
 import javax.persistence.*;
 import java.util.List;
@@ -12,7 +13,7 @@ public class Customer {
     private int id;
 
     @Column(unique = true, nullable = false)
-    private String customer;
+    private String customerName;
 
     @Column(unique = true, nullable = false)
     private String address;
@@ -20,20 +21,20 @@ public class Customer {
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private List<Booking> bookings;
 
-    public Customer(String customer, String address) {
-        this.customer = customer;
+    public Customer(String customerName, String address) {
+        this.customerName = customerName;
         this.address = address;
     }
 
     public Customer() {
     }
 
-    public String getCustomer() {
-        return customer;
+    public String getCustomerName() {
+        return customerName;
     }
 
-    public void setCustomer(String customer) {
-        this.customer = customer;
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
     }
 
     public String getAddress() {
@@ -53,6 +54,6 @@ public class Customer {
     }
 
     public CustomerResponseDTO toCustomerResponseDTO() {
-        return new CustomerResponseDTO(id, customer, address, bookings);
+        return new CustomerResponseDTO(id, customerName, address, bookings);
     }
 }

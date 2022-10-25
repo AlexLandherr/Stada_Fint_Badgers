@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/register")
+@RequestMapping()
 @CrossOrigin(origins = {"http://localhost:3000"}, methods = {RequestMethod.GET, RequestMethod.DELETE, RequestMethod.POST})
 public class CustomerController {
     private final CustomerService customerService;
@@ -23,10 +23,10 @@ public class CustomerController {
         return customerService.getCustomers();
     }
 
-    @PostMapping
+    @PostMapping("/register")
     public CustomerResponseDTO addCustomer(@RequestBody CreateCustomerDTO createCustomerDTO) {
         return customerService.addCustomer(
-                createCustomerDTO.customer(),
+                createCustomerDTO.customerName(),
                 createCustomerDTO.address()
         ).toCustomerResponseDTO();
     }

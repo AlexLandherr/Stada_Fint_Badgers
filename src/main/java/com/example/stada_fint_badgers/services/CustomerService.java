@@ -14,8 +14,8 @@ public class CustomerService {
         this.customerRepo = customerRepo;
     }
 
-    public Customer addCustomer(String customer, String address) {
-        return customerRepo.save(new Customer(customer, address));
+    public Customer addCustomer(String customerName, String address) {
+        return customerRepo.save(new Customer(customerName, address));
     }
 
     public List<Customer> getCustomers() {
