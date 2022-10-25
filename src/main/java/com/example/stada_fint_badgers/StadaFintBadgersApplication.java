@@ -26,7 +26,7 @@ public class StadaFintBadgersApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         customerRepo.save(
-                new Customer("Gunnar Gunnarson", "Stockholm", List.of(new Booking("Test")))
+                new Customer("Gunnar Gunnarson", "Stockholm")
         );
     }
 }

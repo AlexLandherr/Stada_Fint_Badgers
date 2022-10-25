@@ -17,13 +17,12 @@ public class Customer {
     @Column(unique = true, nullable = false)
     private String address;
 
-    @OneToMany(mappedBy = "Customer", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private List<Booking> bookings;
 
-    public Customer(String customer, String address, List<Booking> bookings) {
+    public Customer(String customer, String address) {
         this.customer = customer;
         this.address = address;
-        this.bookings = bookings;
     }
 
     public Customer() {

@@ -11,6 +11,10 @@ public class Booking {
     @Column(nullable = false)
     private String testField;
 
+    @ManyToOne
+    private Customer customer;
+
+
     public Booking(String testField) {
         this.testField = testField;
     }

@@ -16,6 +16,6 @@ public class CustomerService {
     }
 
     public Customer addCustomer(String customer, String address, List<Booking> bookingList) {
-        return customerRepo.save(new Customer(customer, address, bookingList));
+        return customerRepo.save(new Customer(customer, address));
     }
 }
