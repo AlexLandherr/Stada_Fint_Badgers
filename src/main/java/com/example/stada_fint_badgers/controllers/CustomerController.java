@@ -2,14 +2,15 @@ package com.example.stada_fint_badgers.controllers;
 
 import com.example.stada_fint_badgers.dto.CreateCustomerDTO;
 import com.example.stada_fint_badgers.dto.CustomerResponseDTO;
+import com.example.stada_fint_badgers.entities.Customer;
 import com.example.stada_fint_badgers.services.CustomerService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/register")
+@CrossOrigin(origins = {"http://localhost:3000"}, methods = {RequestMethod.GET, RequestMethod.DELETE, RequestMethod.POST})
 public class CustomerController {
     private final CustomerService customerService;
 
@@ -17,12 +18,16 @@ public class CustomerController {
         this.customerService = customerService;
     }
 
+    @GetMapping("/get")
+    public List<Customer> getCustomers(){
+        return customerService.getCustomers();
+    }
+
     @PostMapping
     public CustomerResponseDTO addCustomer(@RequestBody CreateCustomerDTO createCustomerDTO) {
         return customerService.addCustomer(
                 createCustomerDTO.customer(),
-                createCustomerDTO.address(),
-                createCustomerDTO.bookingList()
+                createCustomerDTO.address()
         ).toCustomerResponseDTO();
     }
 }

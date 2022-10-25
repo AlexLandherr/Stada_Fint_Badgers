@@ -1,6 +1,5 @@
 package com.example.stada_fint_badgers.services;
 
-import com.example.stada_fint_badgers.entities.Booking;
 import com.example.stada_fint_badgers.entities.Customer;
 import com.example.stada_fint_badgers.repo.CustomerRepo;
 import org.springframework.stereotype.Service;
@@ -15,7 +14,11 @@ public class CustomerService {
         this.customerRepo = customerRepo;
     }
 
-    public Customer addCustomer(String customer, String address, List<Booking> bookingList) {
+    public Customer addCustomer(String customer, String address) {
         return customerRepo.save(new Customer(customer, address));
+    }
+
+    public List<Customer> getCustomers() {
+        return customerRepo.findAll();
     }
 }

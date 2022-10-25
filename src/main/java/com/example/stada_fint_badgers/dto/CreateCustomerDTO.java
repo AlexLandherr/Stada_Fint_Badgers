@@ -4,5 +4,5 @@ import com.example.stada_fint_badgers.entities.Booking;
 
 import java.util.List;
 
-public record CreateCustomerDTO(String customer, String address, List<Booking> bookingList) {
+public record CreateCustomerDTO(String customer, String address) {
 }
