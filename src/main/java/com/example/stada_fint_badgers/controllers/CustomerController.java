@@ -7,11 +7,13 @@ import com.example.stada_fint_badgers.services.CustomerService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @RestController
-@RequestMapping()
+@RequestMapping("/customer")
 @CrossOrigin(origins = {"http://localhost:3000"}, methods = {RequestMethod.GET, RequestMethod.DELETE, RequestMethod.POST})
 public class CustomerController {
+
     private final CustomerService customerService;
 
     public CustomerController(CustomerService customerService) {
@@ -19,8 +21,10 @@ public class CustomerController {
     }
 
     @GetMapping("/get")
-    public List<Customer> getCustomers(){
-        return customerService.getCustomers();
+    public CustomerResponseDTO getCustomers(@RequestBody CreateCustomerDTO createCustomerDTO){
+        return customerService.getCustomers().stream()
+                .filter(c -> Objects.equals(c.getCustomerName(), createCustomerDTO.customerName()))
+                .map(Customer::toCustomerResponseDTO).toList().get(0);
     }
 
     @PostMapping("/register")

@@ -17,6 +17,7 @@ import java.util.List;
 
 @SpringBootApplication
 public class StadaFintBadgersApplication implements CommandLineRunner {
+
     @Autowired
     CustomerRepo customerRepo;
 
@@ -33,11 +34,30 @@ public class StadaFintBadgersApplication implements CommandLineRunner {
         Customer customer = customerRepo.save(
                 new Customer("Gunnar Gunnarson", "Stockholm")
         );
+        Customer customer1 = customerRepo.save(
+                new Customer("Billy the kid", "vilda västern")
+        );
+
+        Booking booking1 = new Booking(customer, "2022/02/11", "01:00");
+        booking1.setDone(true);
+        Booking booking2 = new Booking(customer, "2022/02/12", "02:00");
+        booking2.setDone(true);
+
+
+
         bookingRepo.saveAll(List.of(
-                new Booking(customer, "Idag för fan", "NU NU NU")
+                booking1,
+                booking2,
+                new Booking(customer, "2022/02/13", "03:00"),
+                new Booking(customer, "2022/02/14", "04:00"),
+                new Booking(customer, "2022/02/15", "05:00"),
+                new Booking(customer1, "idag", "med en gång annars skjuter jag er")
+
         )
 
         );
+
+
     }
 
 

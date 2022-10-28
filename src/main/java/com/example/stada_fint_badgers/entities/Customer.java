@@ -1,5 +1,6 @@
 package com.example.stada_fint_badgers.entities;
 
+import com.example.stada_fint_badgers.dto.BookingResponseDTO;
 import com.example.stada_fint_badgers.dto.CustomerResponseDTO;
 import org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration;
 
@@ -54,6 +55,8 @@ public class Customer {
     }
 
     public CustomerResponseDTO toCustomerResponseDTO() {
-        return new CustomerResponseDTO(id, customerName, address, bookings);
+        List<BookingResponseDTO> bookingResponseDTOList =
+                bookings.stream().map(c -> c.toBookingResponseDTO()).toList();
+        return new CustomerResponseDTO(id, customerName, address, bookingResponseDTOList);
     }
 }

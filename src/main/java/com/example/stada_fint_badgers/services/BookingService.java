@@ -24,9 +24,8 @@ public class BookingService {
     public Booking addBooking(String customerName, String date, String time) {
         List<Customer> customers = customerRepo.findAll();
         Customer customer = customers.stream().
-                filter((c) -> {
-                    return Objects.equals(c.getCustomerName(), customerName);
-                }).findFirst().orElseThrow();
+                filter(c -> Objects.equals(c.getCustomerName(), customerName))
+                .findFirst().orElseThrow();
         return bookingRepo.save(new Booking(customer, date, time));
     }
 
@@ -36,5 +35,26 @@ public class BookingService {
                     return booking.toBookingResponseDTO();
                 })
                 .toList();
+    }
+
+    public List<BookingResponseDTO> getSpecBookings(String customerName) {
+        List<BookingResponseDTO> result = bookingRepo.
+                findAll().
+                stream().
+                filter(b -> Objects.equals(b.getCustomer().getCustomerName(), customerName)).
+                map(b -> b.toBookingResponseDTO()).toList();
+        return  result;
+    }
+
+    public void deleteById(int id) {
+        bookingRepo.deleteById(id);
+    }
+
+    public void acceptCleaning(int id) {
+        Booking booking = bookingRepo.findById(id).orElseThrow();
+        booking.setAccepted(true);
+        bookingRepo.save(booking);
+
+
     }
 }

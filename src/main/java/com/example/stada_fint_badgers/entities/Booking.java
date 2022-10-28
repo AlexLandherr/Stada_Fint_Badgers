@@ -20,6 +20,13 @@ public class Booking {
     @Column(nullable = false)
     private String time;
 
+    @Column
+    private Boolean done;
+
+    @Column
+    private Boolean accepted;
+
+
 
     @ManyToOne
     private Customer customer;
@@ -30,22 +37,23 @@ public class Booking {
         this.date = date;
         this.time = time;
         this.status = "Obekräftad";
+        this.done = false;
+        this.accepted = false;
     }
 
     public Booking() {
     }
 
-
-    public String getTestField() {
-        return status;
+    public Boolean getDone() {
+        return done;
     }
 
-    public void setTestField(String testField) {
-        this.status = testField;
+    public void setDone(Boolean done) {
+        this.done = done;
     }
 
     public BookingResponseDTO toBookingResponseDTO() {
-        return new BookingResponseDTO(customer.getCustomerName(), status, date, time);
+        return new BookingResponseDTO(id, customer.getCustomerName(), status, date, time, done, accepted);
     }
 
     public int getId() {
@@ -86,5 +94,13 @@ public class Booking {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
+    }
+
+    public Boolean getAccepted() {
+        return accepted;
+    }
+
+    public void setAccepted(Boolean accepted) {
+        this.accepted = accepted;
     }
 }
